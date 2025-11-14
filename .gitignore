@@ -25,6 +25,11 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
 
 # Virtual environments
 venv/
@@ -48,3 +53,7 @@ Thumbs.db
 test_photos/
 test_output/
 *.log
+
+# Coverage
+.coverage
+htmlcov/

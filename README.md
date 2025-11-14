@@ -19,58 +19,84 @@ A Python tool for organizing and managing photo/video collections.
 
 ## 安装 / Installation
 
+### 方法 1: 通过 pip 安装 (推荐) / Method 1: Install via pip (Recommended)
+
+```bash
+# 克隆仓库 / Clone repository
+git clone https://github.com/forfire912/photomanager.git
+cd photomanager
+
+# 安装 / Install
+pip install .
+```
+
+安装后可以直接使用命令 / After installation, use command directly:
+```bash
+photo-manager -d ~/Photos --find-duplicates
+```
+
+### 方法 2: 直接运行脚本 / Method 2: Run Script Directly
+
+```bash
+# 安装依赖 / Install dependencies
+pip install -r requirements.txt
+
+# 运行脚本 / Run script
+python photo_manager.py -d /path/to/photos --find-duplicates
+```
+
 ### 要求 / Requirements
 
 - Python 3.6+
 - Pillow (用于EXIF元数据提取 / for EXIF metadata extraction)
 
-### 安装依赖 / Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
+详细安装说明请查看 [INSTALL.md](INSTALL.md) / See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 
 ## 使用方法 / Usage
 
 ### 基本命令 / Basic Commands
 
+**注意**: 如果已通过 pip 安装，使用 `photo-manager` 命令。否则使用 `python photo_manager.py`  
+**Note**: If installed via pip, use `photo-manager` command. Otherwise use `python photo_manager.py`
+
 #### 1. 查找重复文件（预览模式）/ Find Duplicates (Preview Mode)
 
 ```bash
-python photo_manager.py -d /path/to/photos --find-duplicates
+photo-manager -d /path/to/photos --find-duplicates
+# 或 / Or: python photo_manager.py -d /path/to/photos --find-duplicates
 ```
 
 #### 2. 删除重复文件 / Remove Duplicates
 
 ```bash
 # 预览要删除的文件 / Preview files to be removed
-python photo_manager.py -d /path/to/photos --remove-duplicates
+photo-manager -d /path/to/photos --remove-duplicates
 
 # 实际删除文件 / Actually remove files
-python photo_manager.py -d /path/to/photos --remove-duplicates --execute
+photo-manager -d /path/to/photos --remove-duplicates --execute
 ```
 
 #### 3. 按日期整理照片 / Organize Photos by Date
 
 ```bash
 # 预览整理结果 / Preview organization
-python photo_manager.py -d /path/to/photos --organize -o /path/to/organized
+photo-manager -d /path/to/photos --organize -o /path/to/organized
 
 # 实际整理文件 / Actually organize files
-python photo_manager.py -d /path/to/photos --organize -o /path/to/organized --execute
+photo-manager -d /path/to/photos --organize -o /path/to/organized --execute
 ```
 
 #### 4. 扫描多个目录 / Scan Multiple Directories
 
 ```bash
-python photo_manager.py -d /path/to/photos1 /path/to/photos2 /path/to/photos3 --find-duplicates
+photo-manager -d /path/to/photos1 /path/to/photos2 /path/to/photos3 --find-duplicates
 ```
 
 #### 5. 组合操作 / Combined Operations
 
 ```bash
 # 查找重复文件并按日期整理 / Find duplicates and organize by date
-python photo_manager.py -d /path/to/photos --find-duplicates --organize -o /path/to/organized --execute
+photo-manager -d /path/to/photos --find-duplicates --organize -o /path/to/organized --execute
 ```
 
 ### 命令行参数 / Command Line Options
@@ -155,20 +181,20 @@ output_directory/
 假设你有多个文件夹的老照片：/ Suppose you have old photos in multiple folders:
 ```bash
 # 第一步：扫描并查找重复文件 / Step 1: Scan and find duplicates
-python photo_manager.py -d ~/Pictures/OldPhotos ~/Pictures/Family ~/Pictures/Vacation --find-duplicates
+photo-manager -d ~/Pictures/OldPhotos ~/Pictures/Family ~/Pictures/Vacation --find-duplicates
 
 # 第二步：删除重复文件 / Step 2: Remove duplicates
-python photo_manager.py -d ~/Pictures/OldPhotos ~/Pictures/Family ~/Pictures/Vacation --remove-duplicates --execute
+photo-manager -d ~/Pictures/OldPhotos ~/Pictures/Family ~/Pictures/Vacation --remove-duplicates --execute
 
 # 第三步：按日期整理 / Step 3: Organize by date
-python photo_manager.py -d ~/Pictures/OldPhotos ~/Pictures/Family ~/Pictures/Vacation --organize -o ~/Pictures/Organized --execute
+photo-manager -d ~/Pictures/OldPhotos ~/Pictures/Family ~/Pictures/Vacation --organize -o ~/Pictures/Organized --execute
 ```
 
 ### 场景2：清理手机备份 / Scenario 2: Clean Up Phone Backups
 
 ```bash
 # 查找并删除多次备份中的重复照片 / Find and remove duplicates from multiple backups
-python photo_manager.py -d ~/PhoneBackup2023 ~/PhoneBackup2024 --remove-duplicates --execute
+photo-manager -d ~/PhoneBackup2023 ~/PhoneBackup2024 --remove-duplicates --execute
 ```
 
 ## 许可证 / License

@@ -1,0 +1,9 @@
+include README.md
+include LICENSE
+include INSTALL.md
+include RELEASE_NOTES.md
+include FEATURES.md
+include DEMO.md
+include TEST_RESULTS.md
+include requirements.txt
+include examples.py
