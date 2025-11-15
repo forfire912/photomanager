@@ -6,6 +6,7 @@ A tool for organizing photos and videos by shooting time and removing duplicates
 
 ## 功能特点 / Features
 
+- ✅ **Web可视化界面** / **Web Visualization Interface** - Easy-to-use web UI for managing photos
 - ✅ 扫描多个目录中的照片和视频 / Scan photos and videos from multiple directories
 - ✅ 支持多种格式 / Support multiple formats:
   - 图片 / Images: JPG, JPEG, PNG, GIF, BMP, TIFF, HEIC, WebP
@@ -30,6 +31,32 @@ pip install -r requirements.txt
 ```
 
 ## 使用方法 / Usage
+
+### Web界面 / Web Interface (推荐 / Recommended)
+
+启动Web可视化界面 / Start the web visualization interface:
+
+```bash
+python web_ui.py
+```
+
+然后在浏览器中打开 / Then open in your browser: `http://127.0.0.1:5000`
+
+Web界面提供了友好的可视化操作界面，包括：
+- 📂 扫描目录并查看文件列表
+- 🔍 查找和查看重复文件
+- 🗑️ 预览或执行删除重复文件
+- 📅 按日期整理文件
+
+The web interface provides a user-friendly visualization with:
+- 📂 Scan directories and view file lists
+- 🔍 Find and view duplicate files
+- 🗑️ Preview or execute duplicate removal
+- 📅 Organize files by date
+
+![Web UI Screenshot](https://github.com/user-attachments/assets/5e7b22cf-6ea1-48bd-8d5b-973157aa4433)
+
+### 命令行界面 / Command Line Interface
 
 ### 基本用法 / Basic Usage
 

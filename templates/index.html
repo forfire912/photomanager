@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Manager - Visualization Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📷 Photo Manager</h1>
+            <p class="subtitle">Organize and manage your photo/video collections</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Step 1: Scan Directories -->
+            <section class="card">
+                <h2>Step 1: Scan Directories</h2>
+                <div class="form-group">
+                    <label for="directories">Directories to scan (one per line):</label>
+                    <textarea id="directories" rows="4" placeholder="/path/to/photos&#10;/path/to/more/photos"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="recursive" checked>
+                        Scan subdirectories recursively
+                    </label>
+                </div>
+                <button onclick="scanDirectories()" class="btn btn-primary">Scan Directories</button>
+                <div id="scan-results" class="results"></div>
+            </section>
+
+            <!-- Step 2: Find Duplicates -->
+            <section class="card">
+                <h2>Step 2: Find Duplicates</h2>
+                <p class="info">Scan directories first to find duplicates</p>
+                <button onclick="findDuplicates()" class="btn btn-secondary" id="find-duplicates-btn" disabled>Find Duplicates</button>
+                <div id="duplicate-results" class="results"></div>
+            </section>
+
+            <!-- Step 3: Remove Duplicates -->
+            <section class="card">
+                <h2>Step 3: Remove Duplicates (Optional)</h2>
+                <p class="info">Preview or remove duplicate files</p>
+                <div class="button-group">
+                    <button onclick="removeDuplicates(false)" class="btn btn-secondary" id="preview-remove-btn" disabled>Preview Removal</button>
+                    <button onclick="removeDuplicates(true)" class="btn btn-danger" id="execute-remove-btn" disabled>Execute Removal</button>
+                </div>
+                <div id="remove-results" class="results"></div>
+            </section>
+
+            <!-- Step 4: Organize by Date -->
+            <section class="card">
+                <h2>Step 4: Organize by Date</h2>
+                <div class="form-group">
+                    <label for="output-dir">Output directory:</label>
+                    <input type="text" id="output-dir" placeholder="/path/to/organized/photos">
+                </div>
+                <div class="button-group">
+                    <button onclick="organizeFiles(false)" class="btn btn-secondary" id="preview-organize-btn" disabled>Preview Organization</button>
+                    <button onclick="organizeFiles(true)" class="btn btn-success" id="execute-organize-btn" disabled>Execute Organization</button>
+                </div>
+                <div id="organize-results" class="results"></div>
+            </section>
+        </div>
+
+        <footer>
+            <p>Photo Manager - Open Source Photo Organization Tool</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
