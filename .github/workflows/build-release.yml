@@ -1,0 +1,100 @@
+name: Build and Release Windows Executable
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.0
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+        
+    - name: Build CLI executable
+      run: |
+        pyinstaller --onefile --name photo-manager-cli --icon=NONE photo_manager.py
+        
+    - name: Build Web UI executable
+      run: |
+        pyinstaller --onefile --name photo-manager-web --add-data "templates;templates" --add-data "static;static" --icon=NONE web_ui.py
+        
+    - name: Create distribution archive
+      run: |
+        mkdir release
+        copy dist\photo-manager-cli.exe release\
+        copy dist\photo-manager-web.exe release\
+        copy README.md release\
+        copy USAGE_WEB.md release\
+        copy LICENSE release\
+        
+    - name: Create ZIP archive
+      run: |
+        Compress-Archive -Path release\* -DestinationPath photo-manager-windows-x64.zip
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-executables
+        path: |
+          dist/photo-manager-cli.exe
+          dist/photo-manager-web.exe
+          photo-manager-windows-x64.zip
+          
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          photo-manager-windows-x64.zip
+          dist/photo-manager-cli.exe
+          dist/photo-manager-web.exe
+        body: |
+          ## Photo Manager Windows Release
+          
+          ### 下载说明 / Download Instructions
+          
+          **Windows用户 / Windows Users:**
+          - 下载 `photo-manager-windows-x64.zip` 获取完整包
+          - 或单独下载 `photo-manager-cli.exe` (命令行版本) 或 `photo-manager-web.exe` (Web界面版本)
+          
+          ### 使用方法 / Usage
+          
+          **命令行工具 / CLI Tool:**
+          ```bash
+          photo-manager-cli.exe -d C:\Photos --find-duplicates
+          ```
+          
+          **Web界面 / Web UI:**
+          ```bash
+          # 双击运行 photo-manager-web.exe
+          # 然后在浏览器打开 http://127.0.0.1:5000
+          ```
+          
+          ### 功能特性 / Features
+          - ✅ 扫描并整理照片/视频
+          - ✅ 检测并删除重复文件
+          - ✅ 按日期自动分类
+          - ✅ Web可视化界面
+          - ✅ Windows原生可执行文件，无需安装Python
+          
+          ### 系统要求 / System Requirements
+          - Windows 10/11 (64-bit)
+          - 无需安装Python或其他依赖
+          
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

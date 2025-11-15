@@ -159,7 +159,23 @@ A Python tool for organizing and managing photo/video collections.
 
 ## 安装 / Installation
 
-### 方法 1: 通过 pip 安装 (推荐) / Method 1: Install via pip (Recommended)
+### 方法 1: Windows可执行文件 (最简单) / Method 1: Windows Executable (Easiest)
+
+**无需安装Python！/ No Python installation required!**
+
+从 [Releases](https://github.com/forfire912/photomanager/releases) 页面下载Windows可执行文件：
+Download Windows executables from the [Releases](https://github.com/forfire912/photomanager/releases) page:
+
+- `photo-manager-windows-x64.zip` - 完整包 / Complete package
+- `photo-manager-cli.exe` - 命令行版本 / CLI version only
+- `photo-manager-web.exe` - Web界面版本 / Web UI version only
+
+双击运行即可，无需安装Python或依赖库。
+Just double-click to run, no need to install Python or dependencies.
+
+详细说明见 [BUILD.md](BUILD.md)
+
+### 方法 2: 通过 pip 安装 / Method 2: Install via pip
 
 ```bash
 # 克隆仓库 / Clone repository
@@ -175,7 +191,7 @@ pip install .
 photo-manager -d ~/Photos --find-duplicates
 ```
 
-### 方法 2: 直接运行脚本 / Method 2: Run Script Directly
+### 方法 3: 直接运行脚本 / Method 3: Run Script Directly
 
 ```bash
 # 安装依赖 / Install dependencies
