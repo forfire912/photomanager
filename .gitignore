@@ -39,7 +39,8 @@ MANIFEST
 
 # PyInstaller
 *.manifest
-*.spec
+# Keep our custom spec file
+# *.spec
 
 # Virtual environments
 venv/
@@ -73,3 +74,7 @@ test_output/
 # Coverage
 .coverage
 htmlcov/
+
+# Build artifacts
+release/
+*.zip
