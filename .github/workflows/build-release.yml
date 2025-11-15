@@ -12,12 +12,13 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
+        cache: 'pip'
         
     - name: Install dependencies
       run: |
@@ -41,13 +42,15 @@ jobs:
         copy README.md release\
         copy USAGE_WEB.md release\
         copy LICENSE release\
+        copy RELEASE_NOTES.md release\
+        copy QUICKSTART.md release\
         
     - name: Create ZIP archive
       run: |
         Compress-Archive -Path release\* -DestinationPath photo-manager-windows-x64.zip
         
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: windows-executables
         path: |
@@ -64,37 +67,56 @@ jobs:
           dist/photo-manager-cli.exe
           dist/photo-manager-web.exe
         body: |
-          ## Photo Manager Windows Release
+          ## Photo Manager Windows Release / 照片管理工具 Windows 发布版
           
-          ### 下载说明 / Download Instructions
+          ### 📥 下载说明 / Download Instructions
           
           **Windows用户 / Windows Users:**
-          - 下载 `photo-manager-windows-x64.zip` 获取完整包
-          - 或单独下载 `photo-manager-cli.exe` (命令行版本) 或 `photo-manager-web.exe` (Web界面版本)
+          - 下载 `photo-manager-windows-x64.zip` 获取完整包（推荐）
+          - Download `photo-manager-windows-x64.zip` for the complete package (Recommended)
+          - 或单独下载 / Or download separately:
+            - `photo-manager-cli.exe` - 命令行版本 / CLI version
+            - `photo-manager-web.exe` - Web界面版本 / Web UI version
           
-          ### 使用方法 / Usage
+          ### 🚀 快速开始 / Quick Start
           
           **命令行工具 / CLI Tool:**
           ```bash
+          # 查找重复文件 / Find duplicates
           photo-manager-cli.exe -d C:\Photos --find-duplicates
+          
+          # 删除重复文件 / Remove duplicates
+          photo-manager-cli.exe -d C:\Photos --remove-duplicates --execute
+          
+          # 按日期整理 / Organize by date
+          photo-manager-cli.exe -d C:\Photos --organize -o C:\Organized --execute
           ```
           
           **Web界面 / Web UI:**
-          ```bash
-          # 双击运行 photo-manager-web.exe
-          # 然后在浏览器打开 http://127.0.0.1:5000
-          ```
+          1. 双击运行 `photo-manager-web.exe` / Double-click `photo-manager-web.exe`
+          2. 在浏览器打开 / Open in browser: http://127.0.0.1:5000
           
-          ### 功能特性 / Features
-          - ✅ 扫描并整理照片/视频
-          - ✅ 检测并删除重复文件
-          - ✅ 按日期自动分类
-          - ✅ Web可视化界面
-          - ✅ Windows原生可执行文件，无需安装Python
+          ### ✨ 功能特性 / Features
+          - ✅ 扫描并整理照片/视频 / Scan and organize photos/videos
+          - ✅ 检测并删除重复文件 / Detect and remove duplicates
+          - ✅ 按日期自动分类 (YYYY/MM/DD) / Auto-organize by date
+          - ✅ Web可视化界面 / Web visualization interface
+          - ✅ Windows原生可执行文件，无需安装Python / Native Windows executable, no Python required
+          - ✅ 支持16+种格式 / Support 16+ formats (JPG, PNG, MP4, MOV, etc.)
           
-          ### 系统要求 / System Requirements
+          ### 💻 系统要求 / System Requirements
           - Windows 10/11 (64-bit)
-          - 无需安装Python或其他依赖
+          - 无需安装Python或其他依赖 / No Python or dependencies required
+          
+          ### 📚 文档 / Documentation
+          完整文档请查看压缩包中的 README.md 和 QUICKSTART.md
+          
+          For full documentation, see README.md and QUICKSTART.md in the archive
+          
+          ### 🔗 更多信息 / More Information
+          详细发布说明请查看: [RELEASE_NOTES.md](https://github.com/forfire912/photomanager/blob/main/RELEASE_NOTES.md)
+          
+          For detailed release notes, see: [RELEASE_NOTES.md](https://github.com/forfire912/photomanager/blob/main/RELEASE_NOTES.md)
           
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
