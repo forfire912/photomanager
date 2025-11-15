@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+# Byte-compiled / optimized / DLL files
+
+# C extensions
+*.so
+
+# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -24,12 +30,29 @@ wheels/
 venv/
 ENV/
 env/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Virtual environments
+venv/
+env/
+env.bak/
+venv.bak/
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
@@ -42,3 +65,11 @@ htmlcov/
 
 # Logs
 *.log
+# Test files
+test_photos/
+test_output/
+*.log
+
+# Coverage
+.coverage
+htmlcov/
